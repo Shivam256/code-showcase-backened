@@ -11,6 +11,7 @@ const session = require("express-session");
 
 const passport = require("passport");
 
+const {isAuthenticated} = require('./middlewares');
 
 
 
@@ -32,35 +33,33 @@ require('./auth/auth');
 
 //routes
 const authRoutes = require('./routes/auth.routes');
+const projectRoutes = require('./routes/project.routes');
 
 
-
-
-
-
-const secret = "thisIsATEmpSecret";
-const sessionConfig = {
-  name: "session",
-  secret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    httpOnlu: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  },
-};
-app.use(session(sessionConfig));
+// const secret = "thisIsATEmpSecret";
+// const sessionConfig = {
+//   name: "session",
+//   secret,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     httpOnlu: true,
+//     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
+//   },
+// };
+// app.use(session(sessionConfig));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 
 
 app.use('/',authRoutes);
+app.use('/project',isAuthenticated,projectRoutes);
 
 
 app.get("/test", (req, res) => {

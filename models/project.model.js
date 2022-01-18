@@ -6,6 +6,8 @@ const LinkSchema = new Schema({
     gihub:String,
     gitlab:String,
     web:String,
+    codesandbox:String,
+    codepen:String
 })
 
 const projectSchema = new Schema({
@@ -23,8 +25,6 @@ const projectSchema = new Schema({
   stack: [
     {
       name: String,
-      iconName: String,
-      imageUrl: String,
     },
   ],
   ratings: [
