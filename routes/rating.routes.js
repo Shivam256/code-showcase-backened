@@ -6,13 +6,10 @@ const asyncHandler = require("express-async-handler");
 const Project = require("../models/project.model");
 const User = require("../models/user.model");
 
+// router.route("/:id").post(
+//   asyncHandler(async (req, res) => {
+//     const { id } = req.params;
 
-router.route('/:id').get(asyncHandler(async (req,res)=>{
-    const {id} = req.params;
-    const user = await User.findById(id).populate('projects');
-
-    res.send(user);
-}))
-
-
-module.exports = router;
+//     const project = await Project.findById(id);
+//   })
+// );

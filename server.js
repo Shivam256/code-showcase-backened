@@ -34,7 +34,7 @@ require('./auth/auth');
 //routes
 const authRoutes = require('./routes/auth.routes');
 const projectRoutes = require('./routes/project.routes');
-
+const userRoutes = require('./routes/user.routes');
 
 // const secret = "thisIsATEmpSecret";
 // const sessionConfig = {
@@ -60,6 +60,7 @@ app.use(passport.initialize());
 
 app.use('/',authRoutes);
 app.use('/project',isAuthenticated,projectRoutes);
+app.use('/user',isAuthenticated,userRoutes)
 
 
 app.get("/test", (req, res) => {

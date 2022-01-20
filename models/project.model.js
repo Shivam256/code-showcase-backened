@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const Rating = require("./rating.model");
 
 const LinkSchema = new Schema({
-    gihub:String,
+    github:String,
     gitlab:String,
     web:String,
     codesandbox:String,
