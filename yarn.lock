@@ -1110,6 +1110,11 @@ type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+uid-generator@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/uid-generator/-/uid-generator-2.0.0.tgz#70e7b882300a4ccd12841e5a857dacada7fd7452"
+  integrity sha512-XLRw2UyViQueSbd3dOHkswrg4gA4YuhibKzkFiPkilo6cdKEQqOX3K/Yu6Z2WXVMK+npfMNlSSufVSUifbXoOQ==
+
 uid-safe@~2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/uid-safe/-/uid-safe-2.1.5.tgz#2b3d5c7240e8fc2e58f8aa269e5ee49c0857bd3a"

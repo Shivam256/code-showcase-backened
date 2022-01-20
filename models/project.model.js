@@ -15,8 +15,7 @@ const projectSchema = new Schema({
     type: String,
   },
   images: [{
-      url:String,
-      id:String
+      type:String
   }],
   description: {
     type: String,

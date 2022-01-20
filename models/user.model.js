@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const UserSchema = new Schema({
   username: {
@@ -9,8 +9,8 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  email:{
-    type:String,
+  email: {
+    type: String,
   },
   password: String,
   provider: {
@@ -18,23 +18,27 @@ const UserSchema = new Schema({
     id: String,
   },
   profilePic: String,
+  projects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
 });
 
+UserSchema.pre("save", async function (next) {
+  const user = this;
+  const hash = await bcrypt.hash(user.password, 10);
 
+  this.password = hash;
+  next();
+});
 
-UserSchema.pre('save',async function(next){
-    const user = this;
-    const hash = await bcrypt.hash(user.password, 10);
+UserSchema.methods.validatePassword = async function (password) {
+  const user = this;
+  const isValid = await bcrypt.compare(password, user.password);
 
-    this.password = hash;
-    next();
-})
-
-UserSchema.methods.validatePassword = async function(password){
-    const user = this;
-    const isValid = await bcrypt.compare(password,user.password);
-
-    return isValid;
-}
+  return isValid;
+};
 
 module.exports = mongoose.model("User", UserSchema);
