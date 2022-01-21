@@ -62,7 +62,13 @@ router.route("/:id").get(
 
     res.send(project);
   })
-);
+)
+.delete(asyncHandler(async(req,res)=>{
+  const {id} = req.params;
+
+  const project = await Project.findByIdAndDelete(id);
+  res.send(project);
+}))
 
 router.route("/:id/rating").post(
   asyncHandler(async (req, res) => {

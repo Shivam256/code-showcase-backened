@@ -34,13 +34,13 @@ passport.use(
     async (username, password, done) => {
       try {
         const user = await User.findOne({ username });
-
+        console.log(user,"this is the user that is going to be validated!",password,"this is the password you entered");
         if (!user) {
           return done(null, false, { message: "User not found" });
         }
 
         const validate = await user.validatePassword(password);
-
+        console.log(validate,"this is where things are going wrong");
         if (!validate) {
           return done(null, false, { message: "Wrong Password" });
         }

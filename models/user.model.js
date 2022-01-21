@@ -24,20 +24,35 @@ const UserSchema = new Schema({
       ref: "Project",
     },
   ],
+  followers:[
+    {
+      type:Schema.Types.ObjectId,
+      ref:'User',
+    }
+  ],
+  following:[
+    {
+      type:Schema.Types.ObjectId,
+      ref:'User'
+    }
+  ],
+  description:String
 });
 
 UserSchema.pre("save", async function (next) {
   const user = this;
-  const hash = await bcrypt.hash(user.password, 10);
+  // const hash = await bcrypt.hash(user.password, 10);
 
-  this.password = hash;
+  // this.password = hash;
   next();
 });
 
 UserSchema.methods.validatePassword = async function (password) {
   const user = this;
-  const isValid = await bcrypt.compare(password, user.password);
-
+  console.log(password,"in the bcrypt");
+  // const isValid = await bcrypt.compare(password, user.password);
+  // console.log(isValid, "in the bcrypt!");
+  const isValid = password === user.password;
   return isValid;
 };
 

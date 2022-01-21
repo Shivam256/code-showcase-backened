@@ -50,7 +50,7 @@ router.get(
     const decodeToken = jwt.verify(token, "TOP_SECRET");
 
     if (decodeToken) {
-      const user = await User.findById(decodeToken.user._id);
+      const user = await User.findById(decodeToken.user._id).populate('following').populate('followers').populate('projects');
 
       return res.send({ user });
     }
@@ -58,6 +58,8 @@ router.get(
     res.send(null);
   })
 );
+
+
 
 router.route("/auth/google").get(
   passport.authenticate("google", {
